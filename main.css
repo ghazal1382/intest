@@ -1,0 +1,222 @@
+/* ریست اولیه */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* تنظیمات کلی body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #BACABD; /* پس‌زمینه اصلی */
+}
+
+/* استایل لوگو */
+.logo {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8%;
+    filter: drop-shadow(4px 4px 15px rgba(153, 151, 151,1));
+}
+
+/* استایل متن */
+.text {
+    text-align: center;
+    color: #6d8f69;
+    margin-top: 20px;
+}
+
+/* استایل ساعت دیجیتال */
+#clock {
+    font-size: 3em;
+    color: #e7e7e7; 
+    text-align: center;
+    margin-top:40%;
+    text-shadow: 2px 2px 6px rgb(177, 177, 177);
+    font-weight: bold;
+}
+.icon {
+    position: absolute; 
+    bottom: 20px;
+    left: 15px;
+    color: #6d8f69;
+    /* font-size:30px; */
+}
+.icon:hover {
+    color: #2c5539;
+}
+
+/* استایل ریسپانسیو برای موبایل */
+@media only screen and (max-width: 767px) {
+    
+    .uperbackground {
+        width: 100%;
+        height: 50vh;
+        object-fit: cover;
+    }
+
+    .logo {
+        width: 40%;
+        max-width: 200px;
+    } 
+
+    .text {
+        font-size: 20px;
+        width: 100%;
+    }
+
+    #clock {
+        font-size: 2em; /* اندازه فونت کوچک‌تر برای موبایل */
+        margin-top: 30px;
+    }
+    .icon{
+        left: 3%;
+        font-size: 25px;
+    }
+    
+    .dateshamsi{
+        position: absolute;
+        color: rgb(255, 255, 255);
+        font-size:18px;
+        top: 23%;
+        font-weight: bold;
+        text-shadow: 2px 2px 6px rgb(174, 173, 173);
+        text-align: right;
+        padding-right: 8px;
+        /* background: #a52e2e; */
+    }
+    #jalali-date, #jalali-day {
+        margin-top:15px;
+    }
+    #gregorian-date, #gregorian-day {
+        margin-top:15px;
+    }
+    .datemiladi{
+         left: 0;
+         position: absolute;
+         top: 23%;
+         color: rgb(255, 255, 255);
+         font-size:18px;
+         font-weight: bold;
+         text-shadow: 2px 2px 6px rgb(174, 173, 173);
+         text-align:left;
+         padding-left:8px;
+         /* background: #432eb9; */
+
+    }
+}
+
+/* استایل ریسپانسیو برای لپ‌تاپ */
+@media only screen and (min-width: 1023px) {
+    .logo {
+        margin-top: 10%;
+    }
+
+    .text {
+        font-size:25px;
+        width: 35%;
+        left: 1%;
+    }
+
+    .view {
+        display: flex;
+    }
+
+    .uperbackground {
+        width: 65%;
+        height: 100vh;
+        object-fit: cover;
+    }
+
+    #clock {
+        font-size:2.3em;
+    }
+    .icon{
+        left:0.8%;
+        font-size:33px;
+    }
+    .dateshamsi{
+        color: rgb(255, 255, 255);
+        margin-top:40px;
+        font-size: 22px;
+        font-weight: bold;
+        text-shadow: 2px 2px 6px rgb(174, 173, 173);
+
+    }
+    #jalali-date, #jalali-day {
+        margin-bottom:15px;
+    }
+    #gregorian-date, #gregorian-day {
+        margin-top:15px;
+    }
+    .datemiladi{
+        color: rgb(255, 255, 255);
+         margin-top:40px; 
+         font-size: 22px;
+         font-weight: bold;
+         text-shadow: 2px 2px 6px rgb(174, 173, 173);
+
+
+    }
+}
+/* تبلت */
+ @media (min-width:768px) and (max-width: 1023px) {
+    .uperbackground {
+        width: 100%;
+        height: 50vh;
+        object-fit: cover;
+    }
+
+    .logo {
+        width: 20%;
+        max-width: 150px;
+    } 
+
+    .text {
+        font-size: 20px;
+        width: 100%;
+    }
+
+    #clock {
+        font-size: 2em; /* اندازه فونت کوچک‌تر برای موبایل */
+        margin-top: 10px;
+    }
+    .icon{
+        left: 3%;
+        font-size: 25px;
+    }
+    
+    .dateshamsi{
+        position: absolute;
+        color: rgb(255, 255, 255);
+        font-size:20px;
+        top: 23%;
+        right: 10%;
+        font-weight: bold;
+        text-shadow: 2px 2px 6px rgb(174, 173, 173);
+        text-align: right;
+        padding-right: 8px;
+        /* background: #a52e2e; */
+    }
+    #jalali-date, #jalali-day {
+        margin-top:15px;
+    }
+    #gregorian-date, #gregorian-day {
+        margin-top:15px;
+    }
+    .datemiladi{
+         left: 10%;
+         position: absolute;
+         top: 23%;
+         color: rgb(255, 255, 255);
+         font-size:20px;
+         font-weight: bold;
+         text-shadow: 2px 2px 6px rgb(174, 173, 173);
+         text-align:left;
+         padding-left:8px;
+         /* background: #432eb9; */
+
+    }
+}

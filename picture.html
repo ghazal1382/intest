@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="main.css"> 
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <title>Document</title>
+    <style>
+    
+.global-icon::before {
+            content: "\1F310"; /* یونیکد کره زمین */
+            font-size: 25px;   /* اندازه آیکون */
+            display: inline-block;
+            filter: grayscale(100%);
+        }
+    </style>
+</head>
+<body style="position: relative;" class="background">
+
+    <!-- بخش اصلی -->
+    <main class="view">
+        <!-- تصویر پس‌زمینه -->
+        <img class="uperbackground" src="picture/e8e12fbf80858a9ca9bfcb2f7a01adc6.jpg" alt="Background">
+
+        <!-- لوگو -->
+        <div style="height: 50vh; width: 100%;text-align: center; position: relative;">
+            
+              <div style="width: 100%; margin-left: auto; margin-right: auto;">
+                  <img class="logo" src="picture/Test 7.png" alt="Logo">
+              </div>
+
+            <div class="dateshamsi">
+                <div id="jalali-date"></div>
+                <div id="jalali-day"></div>     
+            </div>
+
+            <div class="datemiladi">
+                <div id="gregorian-date"></div>
+                <div id="gregorian-day"></div>  
+            </div>
+            
+            
+            <div id="clock" style="font-size: 1.9em; margin-top:10%; color: white;"></div>
+
+            
+            </div>
+        
+            <!-- متن توضیحی -->
+            <h1 style="position: absolute; bottom: 20px;" class="text">.Software Engineering Co</h1>
+        <!-- <a class="icon" href="https://rayvarz.com/" target="_blank"> -->
+            <a href="https://rayvarz.com/" class="wrapper icon" target="_blank">
+                <div class="global-icon"></div>
+            </a>
+            <i class="fa fa-globe"></i>
+        </a>
+        <!-- ساعت دیجیتال -->
+       
+    </main>
+
+    <!-- جاوااسکریپت -->    
+    <script>
+        // تابع به‌روزرسانی ساعت
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+
+            // مقدار نهایی ساعت
+            const clockDisplay = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').innerText = clockDisplay;
+        }
+
+        // نمایش روز و تاریخ میلادی
+        function updateGregorianDate() {
+            const now = new Date();
+            const daysOfWeekGregorian = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const todayGregorian = daysOfWeekGregorian[now.getDay()];
+    
+            // استخراج روز، ماه و سال
+            const day = now.getDate().toString().padStart(2, '0'); // روز
+            const month = (now.getMonth() + 1).toString().padStart(2, '0'); // ماه
+            const year = now.getFullYear(); // سال
+
+            // ترکیب تاریخ به فرمت دلخواه
+            const gregorianDate = `${year}/${month}/${day}`;
+
+            // قرار دادن مقادیر در HTML
+            document.getElementById('gregorian-day').innerText = todayGregorian; // نمایش روز هفته
+            document.getElementById('gregorian-date').innerText = gregorianDate; // نمایش تاریخ فرمت‌شده
+        }
+
+        // تبدیل تاریخ میلادی به شمسی
+        function gregorianToJalali(gy, gm, gd) {
+        // ثابت‌های مورد نیاز
+        const g_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // تعداد روزهای ماه‌های میلادی
+        const j_days_in_month = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29]; // تعداد روزهای ماه‌های شمسی
+
+        // بررسی سال کبیسه میلادی
+        let gy_leap = (gy % 4 === 0 && gy % 100 !== 0) || (gy % 400 === 0);
+
+        // تعداد روزهای گذشته از ابتدای میلادی
+        let g_day_no = 365 * (gy - 1600) + Math.floor((gy - 1600 + 3) / 4) - Math.floor((gy - 1600 + 99) / 100) + Math.floor((gy - 1600 + 399) / 400);
+
+            for (let i = 0; i < gm - 1; i++) {
+            g_day_no += g_days_in_month[i];
+            }
+
+            if (gm > 2 && gy_leap) g_day_no++; // یک روز اضافه برای سال کبیسه
+
+            g_day_no += gd - 1;
+
+        // تبدیل به روز شمسی
+            let j_day_no = g_day_no - 79;
+
+            let j_np = Math.floor(j_day_no / 12053); // تعداد دوره‌های 33 ساله
+            j_day_no %= 12053;
+
+            let jy = 979 + 33 * j_np + 4 * Math.floor(j_day_no / 1461);
+
+            j_day_no %= 1461;
+
+            if (j_day_no >= 366) {
+            jy += Math.floor((j_day_no - 1) / 365);
+            j_day_no = (j_day_no - 1) % 365;
+                }
+
+            let jm, jd;
+            for (jm = 0; jm < 11 && j_day_no >= j_days_in_month[jm]; jm++) {
+            j_day_no -= j_days_in_month[jm];
+            }
+
+            jd = j_day_no + 1;
+
+            return [jy, jm + 1, jd];
+        }
+
+
+        // نمایش روز و تاریخ شمسی
+        function updateJalaliDate() {
+            const daysOfWeek = ['یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'];
+
+            const now = new Date();
+            const gy = now.getFullYear();
+            const gm = now.getMonth() + 1;
+            const gd = now.getDate();
+            const dayOfWeek = daysOfWeek[now.getDay()];
+
+            const [jy, jm, jd] = gregorianToJalali(gy, gm, gd);
+
+            document.getElementById('jalali-day').innerText = ` ${dayOfWeek}`;
+            document.getElementById('jalali-date').innerText = `${jy}/${jm}/${jd}`;
+        }
+
+        // تابع برای اجرای ساعت و به‌روزرسانی هر ثانیه
+        function updateClockEverySecond() {
+            updateGregorianDate();
+            updateJalaliDate();
+            updateClock(); // اجرای اولیه
+            setInterval(updateClock, 1000); // به‌روزرسانی هر 1 ثانیه
+        }
+
+        // اجرای ساعت
+        updateClockEverySecond();
+    </script>
+
+</body>
+</html>
